@@ -3,9 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Catalog Page</title>
+    <title>Search Page</title>
     <!-- Do not forget to change the path to the css file -->
-    <link href="css/style.css" type="text/css" rel="stylesheet">
+    <link href="./static/css/style.css" type="text/css" rel="stylesheet">
 </head>
 
 <body>
@@ -13,7 +13,7 @@
     <div id="box">
 
         <nav>
-            <img src="img/logo.webp" alt="logo">
+            <img src="./static/img/logo.webp" alt="logo">
 
             <ul class="menu">
                 <li><a href="/">Home</a></li>
@@ -27,14 +27,24 @@
 
         <main>
 
+            <section id="search">
+                <h1>Search</h1>
+                <form action="" method="" class="form">
+                    <input type="text" class="search" name="search" placeholder="Title...">
+                    <input type="text" name="" class="genre" placeholder="Genre...">
+                    <input type="number" name="" class="year" placeholder="Year...">
+                    <input type="submit" value="search">
+                </form>
+            </section>
+
             <section id="catalog">
-                <h1>All Movies</h1>
                 <div class="band">
 
-                    <!-- If there are posts for creature in the database display each of them -->
+                    <!-- If there are posts for movie in the database display each of them -->
                     <div class="flip flip-vertical">
                         <div class="front">
-                            <img src="img/jungle-cruise.jpeg" alt="Jungle-Cruise">
+                            <img src="./static/img/jungle-cruise.jpeg"
+                                alt="Jungle-Couise">
                         </div>
                         <div class="back">
                             <h1>Jungle Cuise</h1>
@@ -54,7 +64,8 @@
 
                     <div class="flip flip-vertical">
                         <div class="front">
-                            <img src="img/the-little-mermaid.jpg" alt="The-Litlle-Mermaid">
+                            <img src="./static/img/the-little-mermaid.jpg"
+                                alt="The-Little-Mermaid">
                         </div>
                         <div class="back">
                             <h1>The Little Mermaid</h1>
@@ -70,7 +81,8 @@
 
                     <div class="flip flip-vertical">
                         <div class="front">
-                            <img src="img/home-alone.jpeg" alt="Home-Alone">
+                            <img src="./static/img/home-alone.jpeg"
+                                alt="Home-Alone">
                         </div>
                         <div class="back">
                             <h1>Home Alone</h1>
@@ -89,13 +101,17 @@
                         </div>
                     </div>
 
-                    <!-- If there are still no posts in the database display: -->
+
+                    <!-- If there are no posts matched display: -->
                     <!-- <div class="no-posts">
-                        <p class="no-offer">There are no posts yet...</p>
+                        <p class="no-offer">There are no movies matched...</p>
                     </div> -->
                 </div>
             </section>
+
         </main>
+
+
         <footer>
             © JS Back-End Workshop
         </footer>
