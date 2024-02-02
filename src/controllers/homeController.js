@@ -8,4 +8,7 @@ router.get('/about', (req, res) => {
     res.render('about', {title: "About Page"})
 });
 
+router.get('/404', (req, res) =>{
+    res.render('404')
+});
 module.exports = router;
