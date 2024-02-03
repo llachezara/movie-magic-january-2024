@@ -1,5 +1,6 @@
 const movies = [
     {
+        _id: 1,
         title: "Jungle Cruise",
         genre: "Adventure",
         director: "Jaume Collet-Serra",
@@ -9,6 +10,7 @@ const movies = [
         description: "Dreaming about saving countless lives and having another adventure, the feisty English feminist and doctor of botany, Dr Lily Houghton, embarks on a peril-laden mission to change the world. Along with her fashionable brother, MacGregor, Dr Houghton enlists the help of the arrogant, wisecracking riverboat skipper, Captain Frank Wolff, to guide them through the serpentine Amazon River in La Quila, his swift wooden boat. Now, as the intrepid trio ventures deeper and deeper into the heart of an impenetrable green maze, searching for something that cannot be found, a centuries-old curse a the ruthless aristocrat, Prince Joachim, threaten to put an end  their ambitious plans."
     },
     {
+        _id: 2,
         title: "The Little Marmaid",
         genre: "Fantasy",
         director: "Rob Marshall",
@@ -18,6 +20,7 @@ const movies = [
         description: "Description: The youngest of King Triton's daughters, Ariel is a beautiful and spirited young mermaid with a thirst for adventur Longing to find out more about the world beyond the sea, Ariel visits the surface a falls for the dashing Prince Eric. Following her heart, she makes a deal with the ev sea witch, Ursula, to experience life on land."
     },
     {
+        _id: 3,
         title: "Home Alone",
         genre: "Comedy",
         director: "Chris Columbus",
