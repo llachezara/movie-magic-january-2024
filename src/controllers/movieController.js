@@ -16,6 +16,9 @@ router.get('/movies/:movieId',(req, res)=>{
    const movieId  = req.params.movieId;
    const movie = movieService.getOne(movieId);
 
+   //TODO: Use handlebars helpers
+   movie.ratingStars = ' &#x2605;'.repeat(Number(movie.rating));
+
    movie ? res.render('details', {movie}) : res.redirect('/404');
 })
 
