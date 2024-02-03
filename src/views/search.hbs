@@ -1,9 +1,9 @@
 <section id="search">
   <h1>Search</h1>
   <form action="" method="GET" class="form">
-    <input type="text" class="search" name="title" placeholder="Title..." />
-    <input type="text" name="genre" class="genre" placeholder="Genre..." />
-    <input type="number" name="year" class="year" placeholder="Year..." />
+    <input type="text" class="search" name="title" value="{{params.title}}" placeholder="Title..." />
+    <input type="text" name="genre" class="genre" value="{{params.genre}}" placeholder="Genre..." />
+    <input type="number" name="year" class="year" value="{{params.year}}" placeholder="Year..." />
     <input type="submit" value="search" />
   </form>
 </section>
@@ -11,6 +11,5 @@
 <section id="catalog">
   <div class="band">
      {{> catalog}}
-     
   </div>
 </section>

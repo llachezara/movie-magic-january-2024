@@ -11,10 +11,11 @@ router.get('/about', (req, res) => {
 });
 
 router.get('/search', (req, res) => {
-    const {title, genre, year} = req.query;
+    const params = req.query;
+    const {title, genre, year} = params;
     const movies = movieService.search(title, genre, year);
 
-    res.render('search', {title: "Search Page", movies})
+    res.render('search', {title: "Search Page", movies, params})
 });
 
 router.get('/404', (req, res) =>{
