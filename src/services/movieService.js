@@ -11,13 +11,13 @@ const movies = [
     },
     {
         _id: 2,
-        title: "The Little Marmaid",
+        title: "The Little Mermaid",
         genre: "Fantasy",
         director: "Rob Marshall",
         year: 2023,
         imageUrl: "/img/the-little-mermaid.jpg",
         rating: 4,
-        description: "Description: The youngest of King Triton's daughters, Ariel is a beautiful and spirited young mermaid with a thirst for adventur Longing to find out more about the world beyond the sea, Ariel visits the surface a falls for the dashing Prince Eric. Following her heart, she makes a deal with the ev sea witch, Ursula, to experience life on land."
+        description: "The youngest of King Triton's daughters, Ariel is a beautiful and spirited young mermaid with a thirst for adventur Longing to find out more about the world beyond the sea, Ariel visits the surface a falls for the dashing Prince Eric. Following her heart, she makes a deal with the ev sea witch, Ursula, to experience life on land."
     },
     {
         _id: 3,
