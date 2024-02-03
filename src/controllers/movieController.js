@@ -16,7 +16,7 @@ router.get('/movies/:movieId',(req, res)=>{
    const movieId  = req.params.movieId;
    const movie = movieService.getOne(movieId);
 
-   res.render('details', {movie});
+   movie ? res.render('details', {movie}) : res.redirect('/404');
 })
 
 module.exports = router;
