@@ -32,9 +32,15 @@ const movies = [
 ];
 
 exports.create = function (movieData) {
+    movieData._id = movies[movies.length-1]+1;
     movies.push(movieData)
 }
 
 exports.getAll = function (){
     return movies.slice();
+}
+
+exports.getOne = function (movieId){
+    const currentMovie = movies.find((movie) => movie._id == movieId);
+    return currentMovie;
 }
