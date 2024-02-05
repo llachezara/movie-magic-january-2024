@@ -54,7 +54,8 @@ exports.create = function (movieData) {
 }
 
 exports.getAll = function (){
-    return movies.slice();
+    const movies = Movie.find();
+    return movies;
 }
 
 exports.getOne = function (movieId){
