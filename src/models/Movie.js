@@ -27,7 +27,7 @@ const movieSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true,
-        match: /^https?/
+        match: /^https?\/\//
     },
     rating: {
         type: Number,
