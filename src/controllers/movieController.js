@@ -21,12 +21,18 @@ router.post('/movie/create', async (req, res) => {
 
 router.get('/movies/:movieId', async (req, res)=>{
    const movieId  = req.params.movieId;
-   let movie = await movieService.getOne(movieId).lean();
 
-   //TODO: Use handlebars helpers
-   movie.ratingStars = ' &#x2605;'.repeat(Number(movie.rating));
+   try{
+        let movie = await movieService.getOne(movieId).lean();
 
-   movie ? res.render('details', {movie}) : res.redirect('/404');
+        //TODO: Use handlebars helpers
+        movie.ratingStars = ' &#x2605;'.repeat(Number(movie.rating));
+
+        movie ? res.render('details', {movie}) : res.redirect('/404');
+   }catch(err){
+        console.log(err);
+   }
+
 })
 
 module.exports = router;
