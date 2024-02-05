@@ -10,10 +10,10 @@ router.get('/about', (req, res) => {
     res.render('about', {title: "About Page"})
 });
 
-router.get('/search', (req, res) => {
+router.get('/search', async (req, res) => {
     const params = req.query;
     const {title, genre, year} = params;
-    const movies = movieService.search(title, genre, year);
+    const movies = await movieService.search(title, genre, year).lean();
 
     res.render('search', {title: "Search Page", movies, params})
 });
