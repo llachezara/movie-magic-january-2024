@@ -59,6 +59,6 @@ exports.getAll = function (){
 }
 
 exports.getOne = function (movieId){
-    const currentMovie = movies.find((movie) => movie._id == movieId);
+    const currentMovie = Movie.findOne({_id: movieId});
     return currentMovie;
 }
