@@ -5,4 +5,15 @@ router.get('/create', (req, res) =>{
     res.render('cast/create');
 })
 
+router.post('/create', async (req, res) =>{
+    const cast = req.body;
+    try{
+        await castService.create(cast);
+        res.redirect('/');
+    }catch(err){
+        console.log(err);
+    }
+
+})
+
 module.exports = router;
