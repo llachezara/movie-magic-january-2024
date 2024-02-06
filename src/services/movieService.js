@@ -26,7 +26,7 @@ exports.getAll = function (){
 }
 
 exports.getOne = function (movieId){
-    const currentMovie = Movie.findOne({_id: movieId});
+    const currentMovie = Movie.findOne({_id: movieId}).populate('casts');
     return currentMovie;
 }
 
