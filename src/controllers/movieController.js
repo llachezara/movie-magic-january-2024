@@ -29,7 +29,7 @@ router.get('/movies/:movieId/', async (req, res)=>{
         //TODO: Use handlebars helpers
         movie.ratingStars = ' &#x2605;'.repeat(Number(movie.rating));
 
-        movie ? res.render('cast/details', {movie}) : res.redirect('/404');
+        movie ? res.render('cast/details', {title: "Movie Details", movie}) : res.redirect('/404');
    }catch(err){
         console.log(err);
    }
@@ -43,7 +43,7 @@ router.get('/movies/:movieId/attach', async (req, res)=>{
 
     const casts = await castService.getAll().lean();
     console.log(casts);
-    res.render('movie/attach-cast', {movie, casts})
+    res.render('movie/attach-cast', {title: "Attach Cast", movie, casts})
 })
 
 router.post('/movies/:movieId/attach', async (req, res)=>{
