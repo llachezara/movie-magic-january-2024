@@ -22,3 +22,11 @@ exports.auth = async function (req, res, next) {
     }
 
 }
+
+exports.isAuth = function (req, res, next){
+    if (!req.user) {
+        return res.redirect('/login');
+    }
+
+    next();
+}

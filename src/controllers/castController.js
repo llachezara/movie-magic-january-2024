@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const castService = require('../services/castService');
+const {isAuth} = require('../middlewares/authMiddleware');
 
-router.get('/create', (req, res) =>{
+router.get('/create', isAuth, (req, res) =>{
     res.render('cast/create', {title: "Create Cast"});
 })
 
