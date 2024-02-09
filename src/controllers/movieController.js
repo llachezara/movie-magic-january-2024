@@ -29,7 +29,7 @@ router.get('/movies/:movieId/', async (req, res)=>{
         //TODO: Use handlebars helpers
         movie.ratingStars = ' &#x2605;'.repeat(Number(movie.rating));
 
-        movie ? res.render('cast/details', {title: "Movie Details", movie}) : res.redirect('/404');
+        movie ? res.render('movie/details', {title: "Movie Details", movie}) : res.redirect('/404');
    }catch(err){
         console.log(err);
    }

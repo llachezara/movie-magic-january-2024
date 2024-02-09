@@ -22,6 +22,10 @@
 
         <p class="disc">Description: {{movie.description}}</p>
       </div>
+      <div class="details-btn">
+        <a href="/movies/{{movie._id}}/edit" id="edit-button">Edit</a>
+        <a href="/movies/{{movie._id}}/delete" id="delete-button">Delete</a>
+      </div>
     </div>
     <div class="card_right">
       <img src="{{movie.imageUrl}}" alt="image" />
