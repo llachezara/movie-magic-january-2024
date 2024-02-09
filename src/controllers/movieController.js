@@ -4,6 +4,7 @@ const castService = require('../services/castService');
 
 router.get('/movie/create', (req, res) => {
     res.render('create', {title: "Movie Create Page"})
+    res.render('movie/create', {title: "Movie Create Page"})
 })
 
 router.post('/movie/create', async (req, res) => {
