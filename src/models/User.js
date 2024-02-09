@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
-const { MongooseError } = require('mongoose/lib/mongoose');
 
 const userSchema = new mongoose.Schema({
     email:{
