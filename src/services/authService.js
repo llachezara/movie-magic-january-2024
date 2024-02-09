@@ -29,7 +29,7 @@ exports.login = async function (userData){
         email: user.email
     }
 
-    const token = await jwt.sign(payload, SECRET);
+    const token = await jwt.sign(payload, SECRET, {expiresIn: '2h'});
     return token;
 
 }
