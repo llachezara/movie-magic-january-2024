@@ -10,6 +10,8 @@ router.post('/register', async (req, res) => {
     await authService.register(userData);
 
     res.send('You are registered!');
+    res.redirect('/login');
+});
 });
 
 module.exports = router;
