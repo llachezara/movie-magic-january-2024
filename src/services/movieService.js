@@ -38,3 +38,8 @@ exports.update = function (movieId, movieData){
   const currentMovie = Movie.findByIdAndUpdate({_id: movieId}, movieData);
   return currentMovie;
 }
+
+exports.delete = function (movieId){
+  const currentMovie = Movie.findByIdAndDelete({_id: movieId});
+  return currentMovie;
+}
