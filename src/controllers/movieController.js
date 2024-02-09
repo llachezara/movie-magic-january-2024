@@ -3,15 +3,17 @@ const movieService = require('../services/movieService');
 const castService = require('../services/castService');
 
 router.get('/movie/create', (req, res) => {
-    res.render('create', {title: "Movie Create Page"})
     res.render('movie/create', {title: "Movie Create Page"})
 })
 
 router.post('/movie/create', async (req, res) => {
     const newMovie = req.body;
+    newMovie.creatorId = req.user._id;
+    console.log(newMovie);
 
     try{
         await movieService.create(newMovie);
+        console.log('Successfully created a new Movie!');
         res.redirect('/');
 
     }catch(err){
@@ -26,11 +28,13 @@ router.get('/movies/:movieId/', async (req, res)=>{
 
    try{
         let movie = await movieService.getOne(movieId).lean();
+        const isOwner = req.user && movie.creatorId == req.user?._id;
+        console.log("ISOWNER: ", isOwner);
 
         //TODO: Use handlebars helpers
         movie.ratingStars = ' &#x2605;'.repeat(Number(movie.rating));
 
-        movie ? res.render('movie/details', {title: "Movie Details", movie}) : res.redirect('/404');
+        movie ? res.render('movie/details', {title: "Movie Details", movie, isOwner}) : res.redirect('/404');
    }catch(err){
         console.log(err);
    }
