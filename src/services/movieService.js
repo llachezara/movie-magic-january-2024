@@ -30,6 +30,11 @@ exports.getOne = function (movieId){
     return currentMovie;
 }
 
-exports.attach = async function (movieId, castId){
+exports.attach = function (movieId, castId){
    return Movie.findByIdAndUpdate({_id: movieId}, { $push: { casts: castId} })
+}
+
+exports.update = function (movieId, movieData){
+  const currentMovie = Movie.findByIdAndUpdate({_id: movieId}, movieData);
+  return currentMovie;
 }
