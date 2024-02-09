@@ -4,7 +4,6 @@
   <head>
     <meta charset="UTF-8" />
     <title>{{title}}</title>
-    <!-- Do not forget to change the path to the css file -->
     <link href="/css/style.css" type="text/css" rel="stylesheet" />
   </head>
 
@@ -19,13 +18,16 @@
             <li><a href="/">Home</a></li>
             <li><a href="/about">About</a></li>
             <li><a href="/search">Search</a></li>
-            <!--Users-->
+            
+            {{#if isAuthenticated}}
             <li><a href="/movie/create">Create Post</a></li>
             <li><a href="/cast/create">Create Cast</a></li>
             <li><a href="/logout">Logout</a></li>     
-            <!--Guest-->
+            
+            {{else}}
             <li><a href="/login">Login</a></li>
             <li><a href="/register">Register</a></li>
+            {{/if}}
         </ul>
 
       </nav>
