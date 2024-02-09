@@ -44,7 +44,11 @@ const movieSchema = new mongoose.Schema({
     casts: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Cast'
-    }]
+    }],
+    creatorId: {
+        type: String,
+        required: true
+    }
 })
 
 module.exports = mongoose.model('Movie', movieSchema);
