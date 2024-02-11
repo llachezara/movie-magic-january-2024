@@ -1,16 +1,31 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const validator = require('validator');
 
 const userSchema = new mongoose.Schema({
     email:{
         type: String,
         required: true,
-        unique: true
+        unique: [true, 'You have already registered!'],
+        trim: true,
+        validate: [
+            function (value) {
+                return validator.isEmail(value)
+            }, 
+            `Invalid email address!`
+        ],
+        minLength: [10, `Email must be at least 10 characters long!`]
     },
     password:{
         type: String,
         required: true,
-        minLength: 8
+        validate: [
+            function (value) {
+                return validator.isAlphanumeric(value)
+            }, 
+            `Password must consist only of letters and digits!`
+        ],
+        minLength: [6, 'Password should be at least 6 characters long!']
     }
 });
 
