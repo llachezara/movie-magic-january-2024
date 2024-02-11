@@ -3,9 +3,9 @@ const bcrypt = require('bcrypt');
 const jwt = require('../lib/jwt');
 const { SECRET } = require('../config/config');
 
-exports.register = async function (userData){
-    const user = await User.create(userData);
-    return user;
+exports.register = function (userData){
+    
+    return User.create(userData);
 };
 
 exports.login = async function (userData){
@@ -13,7 +13,7 @@ exports.login = async function (userData){
 
     const user = await User.findOne({email});
     console.log(user);
-    
+
     if (!user) {
         throw new Error('Invalid email or password');
     }
