@@ -15,7 +15,7 @@ router.post('/register', async (req, res) => {
         res.redirect('/login');
     }catch (err){
         const message = getErrorMessage(err);
-        res.render('auth/register', {title: "Register page", error: message, ...userData})
+        res.status(400).render('auth/register', {title: "Register page", error: message, ...userData})
     }    
 
 });
@@ -26,10 +26,16 @@ router.get('/login', (req, res) => {
 
 router.post('/login', async (req, res) => {
     const userData = req.body;
-    const token = await authService.login(userData);
+    try{
+        const token = await authService.login(userData);
+       
+        res.cookie('user', token);
+        res.redirect('/');
+    }catch (err){
+        const message = getErrorMessage(err);
+        res.status(400).render('auth/login', {title: "Login page", error: message, ...userData})
+    }    
 
-    res.cookie('user', token);
-    res.redirect('/');
 });
 
 router.get('/logout', isAuth, (req, res) =>{
