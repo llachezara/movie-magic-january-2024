@@ -17,8 +17,10 @@ exports.auth = async function (req, res, next) {
 
         next();
         
-    }catch{
-    
+    }catch (error){
+
+        console.error('JWT verification failed:', error.message);
+
         res.clearCookie('user');
         res.redirect('/login');
     }
