@@ -93,10 +93,18 @@ router.post('/movies/:movieId/attach', isAuth, async (req, res)=>{
     const castId = req.body.castId;
 
     try{
-        await movieService.attach(movieId, castId);
-        res.redirect(`/movies/${movieId}`);
+        const cast = await castService.getOne(castId);
+        console.log("CAST: ", cast);
+        if(cast){
+            await movieService.attach(movieId, castId);
+            res.redirect(`/movies/${movieId}`);
+        }else {
+            throw new Error('Cast does not exist!');
+        }
+
     }catch(err){
-        console.log(err);
+        const message = getErrorMessage(err);
+        res.status(400).render('404', {error:message});
     }
 })
 

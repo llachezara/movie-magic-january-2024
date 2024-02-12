@@ -8,3 +8,8 @@ exports.getAll = function (){
     const casts = Cast.find();
     return casts;
 }
+
+exports.getOne = function (castId){
+    const currentCast = Cast.findOne({_id: castId});
+    return currentCast;
+}
