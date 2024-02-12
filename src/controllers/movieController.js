@@ -2,6 +2,7 @@ const router = require('express').Router();
 const movieService = require('../services/movieService');
 const castService = require('../services/castService');
 const {isAuth} = require('../middlewares/authMiddleware');
+const {getErrorMessage} = require('../utils/errorUtils');
 
 router.get('/movie/create', isAuth, (req, res) => {
     res.render('movie/create', {title: "Movie Create Page"})
@@ -18,8 +19,9 @@ router.post('/movie/create', isAuth, async (req, res) => {
         res.redirect('/');
 
     }catch(err){
-        console.log(err);
-        res.redirect('/movie/create');
+        //TODO: Populate values with only correct prvovided data
+        const message = getErrorMessage(err);
+        res.render('movie/create',  {title: "Movie Create Page", error: message, ...newMovie});
     }
 
 })
@@ -37,7 +39,8 @@ router.get('/movies/:movieId/', async (req, res)=>{
 
         movie ? res.render('movie/details', {title: "Movie Details", movie, isOwner}) : res.redirect('/404');
    }catch(err){
-        console.log(err);
+        const message = getErrorMessage(err);
+        
    }
 
 })
@@ -47,6 +50,7 @@ router.get('/movies/:movieId/attach', isAuth, async (req, res)=>{
 
     const movie = await movieService.getOne(movieId).lean();
 
+    //TODO: Show only casts that are not attached to the movie
     const casts = await castService.getAll().lean();
     console.log(casts);
     res.render('movie/attach-cast', {title: "Attach Cast", movie, casts})

@@ -8,7 +8,7 @@ exports.register = async function (userData){
     const user = await User.findOne({ email: userData.email });
     
     if (user) {
-        throw new Error('Email already exists!');
+        throw new Error('Email already exists! :(');
     }
     // try {
     //     await User.create(userData);
