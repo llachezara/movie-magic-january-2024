@@ -3,6 +3,7 @@ const movieService = require('../services/movieService');
 const castService = require('../services/castService');
 const {isAuth} = require('../middlewares/authMiddleware');
 const {getErrorMessage} = require('../utils/errorUtils');
+const mongoose = require('mongoose');
 
 router.get('/movie/create', isAuth, (req, res) => {
     res.render('movie/create', {title: "Movie Create Page"})
@@ -30,17 +31,30 @@ router.get('/movies/:movieId/', async (req, res)=>{
    const movieId  = req.params.movieId;
 
    try{
-        let movie = await movieService.getOne(movieId).lean();
+        let movie = await movieService.getOne(movieId);
+
+        if (movie) {
+           const populatedMovie = await movieService.getOne(movieId).lean();
+           movie = populatedMovie;
+
+        }else {
+            throw new Error('Movie does not exist!');
+        }
+
+
         const isOwner = req.user && movie.creatorId == req.user?._id;
-        console.log("ISOWNER: ", isOwner);
+        console.log("IS OWNER: ", isOwner);
 
         //TODO: Use handlebars helpers
         movie.ratingStars = ' &#x2605;'.repeat(Number(movie.rating));
 
-        movie ? res.render('movie/details', {title: "Movie Details", movie, isOwner}) : res.redirect('/404');
-   }catch(err){
+        res.render('movie/details', {title: "Movie Details", movie, isOwner});
+   }catch (err) {
+
+        console.log("LOG ERR MESSAGE: ", err.message);
+        console.log("LOG ERR: ", err);
         const message = getErrorMessage(err);
-        
+        res.status(400).render('404', {error:message});
    }
 
 })
@@ -48,12 +62,30 @@ router.get('/movies/:movieId/', async (req, res)=>{
 router.get('/movies/:movieId/attach', isAuth, async (req, res)=>{
     const movieId = req.params.movieId;
 
-    const movie = await movieService.getOne(movieId).lean();
+    try{
+        let movie = await movieService.getOne(movieId);
+
+        if (movie) {
+           const populatedMovie = await movieService.getOne(movieId).lean();
+           movie = populatedMovie;
+        }else {
+            throw new Error('Movie does not exist!');
+        }
+
+        const casts = await castService.getAll().lean();
+        console.log(casts);
+        res.render('movie/attach-cast', {title: "Attach Cast", movie, casts})
+   }catch (err) {
+
+        console.log("LOG ERR MESSAGE: ", err.message);
+        console.log("LOG ERR: ", err);
+        const message = getErrorMessage(err);
+        res.status(400).render('404', {error:message});
+   }
+
 
     //TODO: Show only casts that are not attached to the movie
-    const casts = await castService.getAll().lean();
-    console.log(casts);
-    res.render('movie/attach-cast', {title: "Attach Cast", movie, casts})
+
 })
 
 router.post('/movies/:movieId/attach', isAuth, async (req, res)=>{
@@ -70,9 +102,26 @@ router.post('/movies/:movieId/attach', isAuth, async (req, res)=>{
 
 router.get('/movies/:movieId/edit', isAuth, async (req, res) =>{
     const movieId = req.params.movieId;
-    const movie = await movieService.getOne(movieId).lean();
+    
+    try{
+        let movie = await movieService.getOne(movieId);
 
-    res.render('movie/edit', {title: "Edit page", movie});
+        if (movie) {
+           const populatedMovie = await movieService.getOne(movieId).lean();
+           movie = populatedMovie;
+        }else {
+            throw new Error('Movie does not exist!');
+        }
+
+        res.render('movie/edit', {title: "Edit page", movie});
+   }catch (err) {
+
+        console.log("LOG ERR MESSAGE: ", err.message);
+        console.log("LOG ERR: ", err);
+        const message = getErrorMessage(err);
+        res.status(400).render('404', {error:message});
+   }
+   
 })
 
 router.post('/movies/:movieId/edit', isAuth, async (req, res) =>{

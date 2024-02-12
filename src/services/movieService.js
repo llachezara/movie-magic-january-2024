@@ -31,6 +31,7 @@ exports.getOne = function (movieId){
 }
 
 exports.attach = function (movieId, castId){
+  //TODO: Check if castId is valid
    return Movie.findByIdAndUpdate({_id: movieId}, { $push: { casts: castId} })
 }
 
