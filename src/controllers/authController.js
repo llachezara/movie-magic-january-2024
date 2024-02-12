@@ -4,7 +4,7 @@ const {isAuth} = require('../middlewares/authMiddleware');
 const {getErrorMessage} = require('../utils/errorUtils');
 
 router.get('/register', (req, res) => {
-    res.render('auth/register', {title: "Register page"});
+    res.render('auth/register', {pageTitle: "Register page"});
 });
 
 router.post('/register', async (req, res) => {
@@ -15,13 +15,13 @@ router.post('/register', async (req, res) => {
         res.redirect('/login');
     }catch (err){
         const message = getErrorMessage(err);
-        res.status(400).render('auth/register', {title: "Register page", error: message, ...userData})
+        res.status(400).render('auth/register', {pageTitle: "Register page", error: message, ...userData})
     }    
 
 });
 
 router.get('/login', (req, res) => {
-    res.render('auth/login', {title: "Login page"});
+    res.render('auth/login', {pageTitle: "Login page"});
 });
 
 router.post('/login', async (req, res) => {
@@ -33,7 +33,7 @@ router.post('/login', async (req, res) => {
         res.redirect('/');
     }catch (err){
         const message = getErrorMessage(err);
-        res.status(400).render('auth/login', {title: "Login page", error: message, ...userData})
+        res.status(400).render('auth/login', {pageTitle: "Login page", error: message, ...userData})
     }    
 
 });

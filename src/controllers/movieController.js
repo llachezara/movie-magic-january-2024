@@ -6,7 +6,7 @@ const {getErrorMessage} = require('../utils/errorUtils');
 const mongoose = require('mongoose');
 
 router.get('/movie/create', isAuth, (req, res) => {
-    res.render('movie/create', {title: "Movie Create Page"})
+    res.render('movie/create', {pageTitle: "Movie Create Page"})
 })
 
 router.post('/movie/create', isAuth, async (req, res) => {
@@ -22,7 +22,7 @@ router.post('/movie/create', isAuth, async (req, res) => {
     }catch(err){
         //TODO: Populate values with only correct prvovided data
         const message = getErrorMessage(err);
-        res.render('movie/create',  {title: "Movie Create Page", error: message, ...newMovie});
+        res.render('movie/create',  {pageTitle: "Movie Create Page", error: message, ...newMovie});
     }
 
 })
@@ -48,7 +48,7 @@ router.get('/movies/:movieId/', async (req, res)=>{
         //TODO: Use handlebars helpers
         movie.ratingStars = ' &#x2605;'.repeat(Number(movie.rating));
 
-        res.render('movie/details', {title: "Movie Details", movie, isOwner});
+        res.render('movie/details', {pageTitle: "Movie Details", movie, isOwner});
    }catch (err) {
 
         console.log("LOG ERR MESSAGE: ", err.message);
@@ -74,7 +74,7 @@ router.get('/movies/:movieId/attach', isAuth, async (req, res)=>{
 
         const casts = await castService.getAll().lean();
         console.log(casts);
-        res.render('movie/attach-cast', {title: "Attach Cast", movie, casts})
+        res.render('movie/attach-cast', {pageTitle: "Attach Cast", movie, casts})
    }catch (err) {
 
         console.log("LOG ERR MESSAGE: ", err.message);
@@ -121,7 +121,7 @@ router.get('/movies/:movieId/edit', isAuth, async (req, res) =>{
             throw new Error('Movie does not exist!');
         }
 
-        res.render('movie/edit', {title: "Edit page", movie});
+        res.render('movie/edit', {pageTitle: "Edit page", movie});
    }catch (err) {
 
         console.log("LOG ERR MESSAGE: ", err.message);

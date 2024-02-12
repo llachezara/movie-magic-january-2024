@@ -4,7 +4,7 @@ const {isAuth} = require('../middlewares/authMiddleware');
 const {getErrorMessage} = require('../utils/errorUtils');
 
 router.get('/create', isAuth, (req, res) =>{
-    res.render('cast/create', {title: "Create Cast"});
+    res.render('cast/create', {pageTitle: "Create Cast"});
 })
 
 router.post('/create', async (req, res) =>{
@@ -15,7 +15,7 @@ router.post('/create', async (req, res) =>{
         res.redirect('/');
     }catch(err){
        const message = getErrorMessage(err);
-       res.render('cast/create', {title: "Create Cast", ...cast, error: message})
+       res.render('cast/create', {pageTitle: "Create Cast", ...cast, error: message})
     }
 
 })
