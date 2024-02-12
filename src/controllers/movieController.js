@@ -135,10 +135,25 @@ router.post('/movies/:movieId/edit', isAuth, async (req, res) =>{
 
 router.get('/movies/:movieId/delete', isAuth, async (req, res) =>{
     const movieId = req.params.movieId;
-    
-    await movieService.delete(movieId);
+    try{
+        let movie = await movieService.getOne(movieId);
 
-    res.redirect(`/`);
+        if (movie) {
+            await movieService.delete(movieId);
+            res.redirect(`/`);
+        }else{
+            throw new Error('Movie does not exist!');
+        }
+
+   }catch (err) {
+
+        console.log("LOG ERR MESSAGE: ", err.message);
+        console.log("LOG ERR: ", err);
+        const message = getErrorMessage(err);
+        res.status(400).render('404', {error:message});
+   }
+
+
 })
 
 module.exports = router;
