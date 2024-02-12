@@ -136,7 +136,12 @@ router.post('/movies/:movieId/edit', isAuth, async (req, res) =>{
     const movieId = req.params.movieId;
     const movieData = req.body;
     
-    await movieService.update(movieId, movieData);
+    try{
+        await movieService.update(movieId, movieData);
+    }catch(err){
+        const message = getErrorMessage();
+        res.status(400).render('404', {error:message});
+    }
 
     res.redirect(`/movies/${movieId}/`);
 })
